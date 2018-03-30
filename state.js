@@ -1,0 +1,9 @@
+export var State = {
+    START_REACHED: 1,
+    PACKET_PICKED_UP: 2,
+    OBSTACLE_PASSED: 3,
+    TARGET_RECOGNIZED: 4,
+    TARGET_PLACED: 5,
+    TARGET_REACHED: 6,
+    STOP_REACHED: 7
+};
