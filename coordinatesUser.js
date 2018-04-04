@@ -1,7 +1,7 @@
 
 class CoordinatesUserInterface {
     constructor() {
-        if(typeof this.setCoordinates(10.0,10.0) !== "function") {
+        if(this.setCoordinates === undefined) {
             throw new TypeError("Must override method");
         }
     }

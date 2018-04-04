@@ -1,9 +1,7 @@
-import {State} from "state";
-
 
 class PositionChangeListener {
     constructor() {
-        if(typeof this.stateChanged(State) !== "function") {
+        if(this.stateChanged === undefined) {
             throw new TypeError("Must override method");
         }
     }

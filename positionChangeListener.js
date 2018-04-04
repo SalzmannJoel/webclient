@@ -1,7 +1,7 @@
 
 class PositionChangeListener {
     constructor() {
-        if(typeof this.positionChanged(10.0,10.0) !== "function") {
+        if(this.positionChanged === undefined) {
             throw new TypeError("Must override method");
         }
     }

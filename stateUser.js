@@ -1,8 +1,7 @@
-import {State} from "state";
 
-class StatesUserInterface {
+class StateUserInterface {
     constructor() {
-        if(typeof this.setState(State) !== "function") {
+        if(this.setState === undefined) {
             throw new TypeError("Must override method");
         }
     }

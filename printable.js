@@ -1,7 +1,7 @@
 
 class PrintableInterface {
     constructor() {
-        if(typeof this.print() !== "function") {
+        if(this.print === undefined) {
             throw new TypeError("Must override method");
         }
     }
