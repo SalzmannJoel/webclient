@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+body {
+    background: rgb(125, 143, 156);
+}
+
+button {
+    background: rgb(176, 186, 195);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px;
+    -webkit-transition: background 1s; /* Safari */
+    transition: background 1s;
+    width: 100px;
+}
+
+button:hover {
+    background: rgb(39, 67, 89);
+    border-color: rgb(176, 186, 195);
+    cursor: pointer;
+    -webkit-transition: background 1s; /* Safari */
+    transition: background 1s;
+}
+
+#pagetitle {
+    border-bottom: 5px solid rgb(176, 186, 195);
+    padding: 15px 0;
+}
+
+#controlview {
+    padding: 15px 0;
+}
+
+#controlview:after {
+    clear: both;
+    content: "";
+    display: block;
+    line-height: 0;
+}
+
+.buttonwrapper:nth-child(1n) {
+    width: 60%;
+}
+
+.buttonwrapper:nth-child(2n) {
+    width: 40%;
+}
+
+.buttonwrapper {
+    float: left;
+    text-align: center;
+}
+
+.viewwrapper {
+    padding: 15px;
+}
+
+.viewwrapper:after {
+    clear: both;
+    content: "";
+    display: block;
+    line-height: 0;
+}
+
+#positionview {
+    float: left;
+    width: 60%;
+}
+
+#logview {
+    float: left;
+    width: 40%;
+}
+
+#logEntries {
+    background: rgb(176, 186, 195);
+    border: 1px solid rgb(0, 0, 0);
+    height: 500px;
+    overflow-y: scroll;
+    width: 100%;
+}
