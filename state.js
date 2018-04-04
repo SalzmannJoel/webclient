@@ -1,4 +1,4 @@
-export var State = {
+var State = {
     START_REACHED: 1,
     PACKET_PICKED_UP: 2,
     OBSTACLE_PASSED: 3,

@@ -4,10 +4,16 @@
         <meta charset="UTF-8">
         <title>PREN Webclient</title>
         <link rel="stylesheet" href="style.css"/>
-        <script type="text/javascript" src="stateUser.js"></script>
-        <script type="text/javascript" src="coordinatesUser.js"></script>
+        <script type="text/javascript" src="state.js"></script>
+        <script type="text/javascript" src="stateUserInterface.js"></script>
+        <script type="text/javascript" src="coordinatesUserInterface.js"></script>
         <script type="text/javascript" src="stateAndCoordinatesUserInterface.js"></script>
+        <script type="text/javascript" src="stateChangeListener.js"></script>
+        <script type="text/javascript" src="positionChangeListener.js"></script>
+        <script type="text/javascript" src="positionAndStateChangeListener.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterModel.js"></script>
+        <script type="text/javascript" src="logprinter/logPrinterView.js"></script>
+        <script type="text/javascript" src="logprinter/logPrinter.js"></script>
         <script type="text/javascript" src="connection.js"></script>
         <script type="text/javascript" src="connector.js"></script>
     </head>
@@ -40,8 +46,9 @@
         <script type="text/javascript">
             //main
             let connector = new Connector();
-            let logprinter = new LogPrinterModel();
-            connector.registerStateUser(logprinter);
+            let logprinter = new LogPrinter();
+            logprinter.registrateModel(connector);
+            logprinter.test(3);
         </script>
     </body>
 </html>
