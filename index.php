@@ -8,14 +8,16 @@
         <script type="text/javascript" src="stateUserInterface.js"></script>
         <script type="text/javascript" src="coordinatesUserInterface.js"></script>
         <script type="text/javascript" src="stateAndCoordinatesUserInterface.js"></script>
+        <script type="text/javascript" src="timePrinterInterface.js"></script>
+        <script type="text/javascript" src="stateAndCoordinatesUserAndTimePrinterInterface.js"></script>
         <script type="text/javascript" src="stateChangeListener.js"></script>
         <script type="text/javascript" src="positionChangeListener.js"></script>
         <script type="text/javascript" src="positionAndStateChangeListener.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterModel.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterView.js"></script>
         <script type="text/javascript" src="logprinter/logPrinter.js"></script>
-        <script type="text/javascript" src="connection.js"></script>
         <script type="text/javascript" src="connector.js"></script>
+        <script type="text/javascript" src="controlUnit.js"></script>
     </head>
     <body>
         <div id="pagetitle">
@@ -45,10 +47,19 @@
         </div>
         <script type="text/javascript">
             //main
-            let connector = new Connector();
+            let cpu = new ControlUnit(false);
             let logprinter = new LogPrinter();
-            logprinter.registrateModel(connector);
-            connector.startTrolley();
+            logprinter.registrateModel(cpu);
+            cpu.parseResponse({"index":10, "history":[{"x":10,"y":20,"message":"Sali Joel","state":"DEVICE_STOPPED"},{"x":11,"y":22,"message":"Tschau Joel","state":"DEVICE_STARTED"}]});
+            
+            
+            function startTrolley() {
+                connector.startTrolley();
+            }
+            
+            function stopTrolley() {
+                connector.stopTrolley();
+            }
         </script>
     </body>
 </html>

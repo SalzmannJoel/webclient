@@ -8,9 +8,9 @@ class LogPrinter extends PositionAndStateChangeListener {
         this.model.registerPositionChangeListener(this);
     }
     
-    registrateModel(connector) {
-        connector.registerCoordinatesUser(this.model);
-        connector.registerStateUser(this.model);
+    registrateModel(provider) {
+        provider.registerCoordinatesUser(this.model);
+        provider.registerStateUser(this.model);
     }
     
     positionChanged(x, y) {
