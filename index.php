@@ -48,7 +48,7 @@
             let connector = new Connector();
             let logprinter = new LogPrinter();
             logprinter.registrateModel(connector);
-            logprinter.test(3);
+            connector.startTrolley();
         </script>
     </body>
 </html>
