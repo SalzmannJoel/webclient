@@ -24,9 +24,9 @@
             <h1>Mission PREN T-30</h1>
         </div>
         <div id="stateview">
-            <div id="stateViewCanvas">
+            <canvas id="stateViewCanvas" width="1000" height="200">
                 
-            </div>
+            </canvas>
         </div>
         <div id="controlview">
             <div class="buttonwrapper">
@@ -39,9 +39,9 @@
         <div class="viewwrapper">
             <div id="positionview">
                 <h2>Position</h2>
-                <div id="positionViewCanvas">
+                <canvas id="positionViewCanvas" width="500" height="500">
                     
-                </div>
+                </canvas>
             </div>
             <div id="logview">
                 <h2>Log</h2>
