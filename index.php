@@ -19,6 +19,8 @@
         <script type="text/javascript" src="logprinter/logPrinterModel.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterView.js"></script>
         <script type="text/javascript" src="logprinter/logPrinter.js"></script>
+        <script type="text/javascript" src="positionprinter/printableInterface.js"></script>
+        <script type="text/javascript" src="positionprinter/cube.js"></script>
         <script type="text/javascript" src="positionprinter/positionPrinterModel.js"></script>
         <script type="text/javascript" src="positionprinter/positionPrinterView.js"></script>
         <script type="text/javascript" src="positionprinter/positionPrinter.js"></script>
@@ -63,7 +65,8 @@
             logprinter.registrateModel(cpu);
             let statePrinter = new StatePrinter();
             statePrinter.registrateModel(cpu);
-//            cpu.parseResponse({"index":10, "history":[{"x":10,"y":20,"message":"Sali Joel","state":"DEVICE_STOPPED"},{"x":11,"y":22,"message":"Tschau Joel","state":"DEVICE_STARTED"}]});
+            let positionPrinter = new PositionPrinter();
+            positionPrinter.registrateModel(cpu);
             
             function startTrolley() {
                 connector.startTrolley();

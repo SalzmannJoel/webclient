@@ -5,6 +5,7 @@ class PositionPrinter extends PositionChangeListener {
         this.view = new PositionPrinterView();
         this.model = new PositionPrinterModel();
         this.model.registerPositionChangeListener(this);
+        this.view.moveToStart();
     }
     
     registrateModel(provider) {
@@ -12,6 +13,6 @@ class PositionPrinter extends PositionChangeListener {
     }
     
     positionChanged(x, y) {
-        this.view.print(x, y);
+        this.view.moveTo(x, y);
     }
 }
