@@ -4,7 +4,7 @@ class LogPrinterModel extends StateAndCoordinatesUserInterface {
         super();
         this.stateChangeListeners = [];
         this.positionChangeListeners = [];
-        this.state = State.START_REACHED;
+        this.state = State["START_REACHED"];
         this.x = 0;
         this.y = 0;
     }
@@ -37,6 +37,7 @@ class LogPrinterModel extends StateAndCoordinatesUserInterface {
             this.x = x;
             this.y = y;
             this.positionChangeListeners.forEach(function(item) {
+                console.log("logPrinterModel calls stateChanged");
                 item.positionChanged(x, y);
             });
         }

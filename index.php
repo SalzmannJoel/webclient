@@ -13,6 +13,9 @@
         <script type="text/javascript" src="stateChangeListener.js"></script>
         <script type="text/javascript" src="positionChangeListener.js"></script>
         <script type="text/javascript" src="positionAndStateChangeListener.js"></script>
+        <script type="text/javascript" src="stateprinter/statePrinterModel.js"></script>
+        <script type="text/javascript" src="stateprinter/statePrinterView.js"></script>
+        <script type="text/javascript" src="stateprinter/statePrinter.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterModel.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterView.js"></script>
         <script type="text/javascript" src="logprinter/logPrinter.js"></script>
@@ -24,7 +27,7 @@
             <h1>Mission PREN T-30</h1>
         </div>
         <div id="stateview">
-            <canvas id="stateViewCanvas" width="1000" height="200">
+            <canvas id="stateviewCanvas" width="1000" height="150">
                 
             </canvas>
         </div>
@@ -39,7 +42,7 @@
         <div class="viewwrapper">
             <div id="positionview">
                 <h2>Position</h2>
-                <canvas id="positionViewCanvas" width="500" height="500">
+                <canvas id="positionviewCanvas" width="700" height="450">
                     
                 </canvas>
             </div>
@@ -55,8 +58,9 @@
             let cpu = new ControlUnit(false);
             let logprinter = new LogPrinter();
             logprinter.registrateModel(cpu);
-            cpu.parseResponse({"index":10, "history":[{"x":10,"y":20,"message":"Sali Joel","state":"DEVICE_STOPPED"},{"x":11,"y":22,"message":"Tschau Joel","state":"DEVICE_STARTED"}]});
-            
+            let statePrinter = new StatePrinter();
+            statePrinter.registrateModel(cpu);
+//            cpu.parseResponse({"index":10, "history":[{"x":10,"y":20,"message":"Sali Joel","state":"DEVICE_STOPPED"},{"x":11,"y":22,"message":"Tschau Joel","state":"DEVICE_STARTED"}]});
             
             function startTrolley() {
                 connector.startTrolley();
