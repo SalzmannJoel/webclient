@@ -1,7 +1,17 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-
+class PositionPrinter extends PositionChangeListener {
+    constructor() {
+        super();
+        this.view = new PositionPrinterView();
+        this.model = new PositionPrinterModel();
+        this.model.registerPositionChangeListener(this);
+    }
+    
+    registrateModel(provider) {
+        provider.registerCoordinatesUser(this.model);
+    }
+    
+    positionChanged(x, y) {
+        this.view.print(x, y);
+    }
+}

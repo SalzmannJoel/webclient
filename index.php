@@ -19,6 +19,9 @@
         <script type="text/javascript" src="logprinter/logPrinterModel.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterView.js"></script>
         <script type="text/javascript" src="logprinter/logPrinter.js"></script>
+        <script type="text/javascript" src="positionprinter/positionPrinterModel.js"></script>
+        <script type="text/javascript" src="positionprinter/positionPrinterView.js"></script>
+        <script type="text/javascript" src="positionprinter/positionPrinter.js"></script>
         <script type="text/javascript" src="connector.js"></script>
         <script type="text/javascript" src="controlUnit.js"></script>
     </head>
