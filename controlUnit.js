@@ -6,6 +6,7 @@ class ControlUnit {
         this.currentY = 0;
         this.currentState = null;
         this.stopRequest = false;
+        this.lastResponse = "";
         this.connector = new Connector(host);
         this.stateUsers = [];
         this.coordinatesUsers = [];
@@ -18,9 +19,9 @@ class ControlUnit {
     }
     
     run() {
-        let running = setInterval(function(self){ 
+        let self = this;
+        self.running = setInterval(function(){ 
             self.connector.request(0, -1);
-            self.parseResponse(self.connector.fetchResponse());
         }, 1000);
         if(this.stopRequest) {
             clearInterval(running);
@@ -36,6 +37,11 @@ class ControlUnit {
     stopTrolley() {
         this.connector.request(2, -1);
         this.stopRequest = true;
+    }
+    
+    fetchResponse(response) {
+        this.lastResponse = response;
+        this.parseResponse(response);
     }
     
     parseResponse(response) {

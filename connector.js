@@ -2,21 +2,16 @@
 class Connector {
     constructor(host) {
         this.host = host;
-        this.lastResponse = "";
     }
     
-    request(action, index) {
+    request(callback, action, index) {
         let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function(self) {
+        xhttp.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-                    self.lastResponse = this.responseText;
+                    callback.fetchResponse(this.responseText);
                }
             };
         xhttp.open("GET", this.host+"/api?action="+action+"&index="+index, true);
         xhttp.send();
-    }
-    
-    fetchResponse() {
-        return this.lastResponse;
     }
 }
