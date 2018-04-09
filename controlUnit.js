@@ -14,7 +14,10 @@ class ControlUnit {
         if(generatePrinters) {
             logPrinter = new LogPrinter();
             logPrinter.registrateModel(this);
-            //ToDo: put other printers here
+            statePrinter = new StatePrinter();
+            statePrinter.registrateModel(this);
+            positionPrinter = new PositionPrinter();
+            positionPrinter.registrateModel(this);
         }
     }
     
@@ -55,9 +58,9 @@ class ControlUnit {
             this.parseHistory(jsonObject.history);
         } 
         else if(jsonObject.hasOwnProperty("index")) {
-            if(this.index < jsonObject.index) {
-                this.index = jsonObject.index;
-                this.connector.request(this, 0, this.index);
+            if(this.currentIndex < jsonObject.index) {
+                this.currentIndex = jsonObject.index;
+                this.connector.request(this, 0, this.currentIndex);
             }
         }
     }
