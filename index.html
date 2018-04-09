@@ -67,13 +67,35 @@
             statePrinter.registrateModel(cpu);
             let positionPrinter = new PositionPrinter();
             positionPrinter.registrateModel(cpu);
-            
+//            let x = 150;
+//            let y = 360;
+//            let cState = "DEVICE_STARTED";
+//            setInterval(function(){
+//                cpu.parseResponse({"index":10, "history":[{"x":x,"y":y,"message":"Sali Joel","state":cState}]});
+//                if(x>150) {
+//                    cState = "PACKAGE_PICKED_UP";
+//                }
+//                if(x>200) {
+//                    cState = "OBSTACLE_PASSED";
+//                }
+//                if(x>400) {
+//                    cState = "TARGET_DETECTED";
+//                }
+//                if(x>450) {
+//                    cState = "PACKAGE_DROPPED";
+//                }
+//                if(x>600) {
+//                    cState = "DESTINATION_REACHED";
+//                }
+//                x = x+2;
+//                y = y-0.5;
+//            }, 200);
             function startTrolley() {
-                connector.startTrolley();
+                cpu.startTrolley();
             }
             
             function stopTrolley() {
-                connector.stopTrolley();
+                cpu.stopTrolley();
             }
         </script>
     </body>

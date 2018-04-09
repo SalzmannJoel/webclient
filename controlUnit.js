@@ -1,11 +1,12 @@
 
 class ControlUnit {
-    constructor(generatePrinters) {
+    constructor(host, generatePrinters) {
         this.currentIndex = 0;
         this.currentX = 0;
         this.currentY = 0;
         this.currentState = null;
-        this.connector = new Connector();
+        this.stopRequest = false;
+        this.connector = new Connector(host);
         this.stateUsers = [];
         this.coordinatesUsers = [];
         this.timePrinters = [];
@@ -17,9 +18,9 @@ class ControlUnit {
     }
     
     run() {
-        let running = setInterval(function(){ 
-            this.connector.request(0, -1);
-            this.parseResponse(this.connector.fetchResponse());
+        let running = setInterval(function(self){ 
+            self.connector.request(0, -1);
+            self.parseResponse(self.connector.fetchResponse());
         }, 1000);
         if(this.stopRequest) {
             clearInterval(running);
@@ -27,12 +28,14 @@ class ControlUnit {
     }
     
     startTrolley() {
+        this.stopRequest = false;
         this.connector.request(1, -1);
         this.run();
     }
     
     stopTrolley() {
         this.connector.request(2, -1);
+        this.stopRequest = true;
     }
     
     parseResponse(response) {

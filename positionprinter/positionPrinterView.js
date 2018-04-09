@@ -1,7 +1,6 @@
 
 class PositionPrinterView {
     constructor() {
-        this.lastLine = [0, 0, 0, 0];
         this.xMin = 50;
         this.xMax = 650;
         this.yMin = 60;
@@ -53,10 +52,6 @@ class PositionPrinterView {
         this.ctx.stroke();
         this.ctx.closePath();
         this.print(x,y);
-        this.lastLine[0] = x+cubeWidthHalf;
-        this.lastLine[1] = y;
-        this.lastLine[2] = x+cubeWidthHalf;
-        this.lastLine[3] = yLinePoint;
         console.log("move to: "+x+", "+y);
     }
     
