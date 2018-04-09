@@ -21,21 +21,21 @@ class ControlUnit {
     run() {
         let self = this;
         self.running = setInterval(function(){ 
-            self.connector.request(0, -1);
+            self.connector.request(self ,0, -1);
         }, 1000);
         if(this.stopRequest) {
-            clearInterval(running);
+            clearInterval(self.running);
         }
     }
     
     startTrolley() {
         this.stopRequest = false;
-        this.connector.request(1, -1);
+        this.connector.request(this, 1, -1);
         this.run();
     }
     
     stopTrolley() {
-        this.connector.request(2, -1);
+        this.connector.request(this, 2, -1);
         this.stopRequest = true;
     }
     
@@ -57,7 +57,7 @@ class ControlUnit {
         else if(jsonObject.hasOwnProperty("index")) {
             if(this.index < jsonObject.index) {
                 this.index = jsonObject.index;
-                this.connector.request(0, this.index);
+                this.connector.request(this, 0, this.index);
             }
         }
     }
