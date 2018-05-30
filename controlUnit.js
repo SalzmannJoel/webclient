@@ -124,21 +124,21 @@ class ControlUnit {
     }
     
     registerStateUser(obj) {
-        if(obj instanceof StateUserInterface || obj instanceof StateAndCoordinatesUserInterface) {
+        if(obj instanceof StateUserInterface || obj instanceof InterfaceCoordinatesAndStateUser) {
             this.stateUsers.push(obj);
             console.log("New stateUser in controlUnit");
         }
     }
     
     registerCoordinatesUser(obj) {
-        if(obj instanceof CoordinatesUserInterface || obj instanceof StateAndCoordinatesUserInterface) {
+        if(obj instanceof CoordinatesUserInterface || obj instanceof InterfaceCoordinatesAndStateUser) {
             this.coordinatesUsers.push(obj);
             console.log("New positionUser in controlUnit");
         }
     }
     
     registerTimePrinter(obj) {
-        if(obj instanceof TimePrinterInterface || obj instanceof StateAndCoordinatesUserAndTimePrinterInterface) {
+        if(obj instanceof TimePrinterInterface || obj instanceof InterfaceCoordinatesAndStateUserAndTimePrinter) {
             this.timePrinters.push(obj);
             console.log("New timePrinter in controlUnit");
         }

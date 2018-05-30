@@ -1,10 +1,10 @@
 
-class PositionPrinter extends PositionAndStateChangeListener {
+class PositionPrinter extends CoordinatesAndStateChangeListener {
     constructor() {
         super();
         this.view = new PositionPrinterView();
         this.model = new PositionPrinterModel();
-        this.model.registerPositionChangeListener(this);
+        this.model.registerCoordinatesChangeListener(this);
         this.model.registerStateChangeListener(this);
         this.view.moveToStart();
     }
@@ -14,7 +14,7 @@ class PositionPrinter extends PositionAndStateChangeListener {
         provider.registerStateUser(this.model);
     }
     
-    positionChanged(x, y) {
+    coordinatesChanged(x, y) {
         this.view.moveTo(x, y);
     }
     
