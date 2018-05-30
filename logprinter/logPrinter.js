@@ -20,9 +20,4 @@ class LogPrinter extends PositionAndStateChangeListener {
     stateChanged(state) {
         this.view.printState(state);
     }
-    
-    test(s) {
-        this.model.setState(s);
-        this.model.setCoordinates(10, 12);
-    }
 }

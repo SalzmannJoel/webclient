@@ -5,6 +5,7 @@ class ControlUnit {
         this.currentX = 0;
         this.currentY = 0;
         this.currentState = null;
+        this.currentMessage = null;
         this.stopRequest = false;
         this.lastResponse = "";
         this.connector = new Connector(host);
@@ -89,7 +90,10 @@ class ControlUnit {
                 console.log("new coordinates: x="+item.x+", y="+item.y);
                 this.setCoordinates(item.x, item.y);
             }
-            //ToDo: what to do with message? Print in Log?
+            if(this.currentMessage !== item.message) {
+                this.currentMessage = item.message;
+                this.setMessage(item.message);
+            }
         }
     }
     
@@ -106,6 +110,10 @@ class ControlUnit {
         this.coordinatesUsers.forEach(function(item) {
             item.setCoordinates(x, y);
         });
+    }
+    
+    setMessage(message) {
+        //ToDo: implement
     }
     
     //could be realised this way or directly in printState

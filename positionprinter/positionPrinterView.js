@@ -5,6 +5,7 @@ class PositionPrinterView {
         this.xMax = 650;
         this.yMin = 60;
         this.yMax = 160;
+        this.cubePickedUp = false;
         this.canvas = document.getElementById("positionviewCanvas");
         this.cube = new Cube(40, 40);
         this.ctx = this.canvas.getContext("2d");
@@ -33,16 +34,19 @@ class PositionPrinterView {
     }
     
     moveToStart() {
+        //ToDo: Depend on cubepickup
         this.drawBorders();
         this.cube.print(this.canvas, 150, 360);
     }
     
     moveToEnd() {
+        //ToDo: Depend on cubepickup
         this.drawBorders();
         this.cube.print(this.canvas, 550, 360);
     }
     
     moveTo(x, y) {
+        //ToDo: Depend on cubepickup
         this.drawBorders();
         let cubeWidthHalf = this.cube.width/2;
         let yLinePoint = this.yMax-(this.yMax-this.yMin)*(x+cubeWidthHalf-this.xMin)/(this.xMax-this.xMin);
@@ -53,6 +57,10 @@ class PositionPrinterView {
         this.ctx.closePath();
         this.print(x,y);
         console.log("move to: "+x+", "+y);
+    }
+    
+    setCubePicketUp(bool) {
+        this.cubePicketUp = bool;
     }
     
     print(x, y) {
