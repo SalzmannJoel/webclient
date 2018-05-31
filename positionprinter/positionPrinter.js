@@ -30,8 +30,10 @@ class PositionPrinter extends CoordinatesAndStateChangeListener {
     stateChanged(state) {
         if(state === State["PACKAGE_PICKED_UP"]) {
             this.view.setCubePicketUp(true);
+            this.view.setCubeDropped(false);
         } else if(state === State["PACKAGE_DROPPED"]) {
             this.view.setCubePicketUp(false);
+            this.view.setCubeDropped(true);
         }
         this.view.printState(state);
     }

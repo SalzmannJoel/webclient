@@ -11,8 +11,10 @@ class Audioplayer extends InterfaceStateUser {
                 case State['DEVICE_STARTED']:
                     document.getElementById("audioItsMe").play();
                     document.getElementById("audioMain").play();
+                    break;
                 case State['DESTINATION_REACHED']:
                     document.getElementById("audioTheEnd").play();
+                    break;
             }
         }
     }

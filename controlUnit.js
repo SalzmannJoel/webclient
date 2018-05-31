@@ -104,7 +104,7 @@ class ControlUnit {
     }
     
     setState(state) {
-        if(state > 0 && state < 8) {
+        if(state >= State["DEVICE_STARTED"] && state <= State["DEVICE_STOPPED"]) {
             this.state = state;
             this.stateUsers.forEach(function(item) {
                 item.setState(state);
