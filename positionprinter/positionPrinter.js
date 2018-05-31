@@ -14,8 +14,16 @@ class PositionPrinter extends CoordinatesAndStateChangeListener {
         provider.registerStateUser(this.model);
     }
     
-    coordinatesChanged(x, y) {
+    convertCoordinates(x, y) {
+        //ToDo: Convert coordinates
+        //x between 0 and 350
+        //y between 0 and 110
+        //cube starts at 65
         this.view.moveTo(x, y);
+    }
+    
+    coordinatesChanged(x, y) {
+        this.convertCoordinates(x, y);
     }
     
     stateChanged(state) {

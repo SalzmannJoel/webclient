@@ -5,21 +5,21 @@
         <title>PREN Webclient</title>
         <link rel="stylesheet" href="style.css"/>
         <script type="text/javascript" src="state.js"></script>
-        <script type="text/javascript" src="stateUserInterface.js"></script>
-        <script type="text/javascript" src="coordinatesUserInterface.js"></script>
-        <script type="text/javascript" src="stateAndCoordinatesUserInterface.js"></script>
-        <script type="text/javascript" src="timePrinterInterface.js"></script>
-        <script type="text/javascript" src="stateAndCoordinatesUserAndTimePrinterInterface.js"></script>
+        <script type="text/javascript" src="interfaceStateUser.js"></script>
+        <script type="text/javascript" src="interfaceCoordinatesUser.js"></script>
+        <script type="text/javascript" src="interfaceCoordinatesAndStateUser.js"></script>
+        <script type="text/javascript" src="interfaceTimePrinter.js"></script>
+        <script type="text/javascript" src="interfaceCoordinatesAndStateUserAndTimePrinter.js"></script>
         <script type="text/javascript" src="stateChangeListener.js"></script>
-        <script type="text/javascript" src="positionChangeListener.js"></script>
-        <script type="text/javascript" src="positionAndStateChangeListener.js"></script>
+        <script type="text/javascript" src="coordinatesChangeListener.js"></script>
+        <script type="text/javascript" src="coordinatesAndStateChangeListener.js"></script>
         <script type="text/javascript" src="stateprinter/statePrinterModel.js"></script>
         <script type="text/javascript" src="stateprinter/statePrinterView.js"></script>
         <script type="text/javascript" src="stateprinter/statePrinter.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterModel.js"></script>
         <script type="text/javascript" src="logprinter/logPrinterView.js"></script>
         <script type="text/javascript" src="logprinter/logPrinter.js"></script>
-        <script type="text/javascript" src="positionprinter/printableInterface.js"></script>
+        <script type="text/javascript" src="positionprinter/interfacePrintable.js"></script>
         <script type="text/javascript" src="positionprinter/cube.js"></script>
         <script type="text/javascript" src="positionprinter/positionPrinterModel.js"></script>
         <script type="text/javascript" src="positionprinter/positionPrinterView.js"></script>
@@ -67,29 +67,29 @@
             statePrinter.registrateModel(cpu);
             let positionPrinter = new PositionPrinter();
             positionPrinter.registrateModel(cpu);
-//            let x = 150;
-//            let y = 360;
-//            let cState = "DEVICE_STARTED";
-//            setInterval(function(){
-//                cpu.parseResponse({"index":10, "history":[{"x":x,"y":y,"message":"Sali Joel","state":cState}]});
-//                if(x>150) {
-//                    cState = "PACKAGE_PICKED_UP";
-//                }
-//                if(x>200) {
-//                    cState = "OBSTACLE_PASSED";
-//                }
-//                if(x>400) {
-//                    cState = "TARGET_DETECTED";
-//                }
-//                if(x>450) {
-//                    cState = "PACKAGE_DROPPED";
-//                }
-//                if(x>600) {
-//                    cState = "DESTINATION_REACHED";
-//                }
-//                x = x+2;
-//                y = y-0.5;
-//            }, 200);
+            let x = 150;
+            let y = 360;
+            let cState = "DEVICE_STARTED";
+            setInterval(function(){
+                cpu.parseResponse({"index":10, "history":[{"x":x,"y":y,"message":"Sali Joel","state":cState}]});
+                if(x>150) {
+                    cState = "PACKAGE_PICKED_UP";
+                }
+                if(x>200) {
+                    cState = "OBSTACLE_PASSED";
+                }
+                if(x>400) {
+                    cState = "TARGET_DETECTED";
+                }
+                if(x>450) {
+                    cState = "PACKAGE_DROPPED";
+                }
+                if(x>600) {
+                    cState = "DESTINATION_REACHED";
+                }
+                x = x+2;
+                y = y-0.5;
+            }, 200);
             function startTrolley() {
                 cpu.startTrolley();
             }

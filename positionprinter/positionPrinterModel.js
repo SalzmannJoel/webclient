@@ -2,6 +2,7 @@
 class PositionPrinterModel extends InterfaceCoordinatesAndStateUser {
     constructor() {
         super();
+        this.stateChangeListeners = [];
         this.coordinatesChangeListeners = [];
         this.state = State["START_REACHED"];
         this.x = 0;

@@ -1,4 +1,9 @@
-
+//zielmasten erreicht: stage clear
+//package picket up: power up
+//device stoppet ohne würfel abgesetz: mammamia
+//startsignal: herewego
+//parcour geschafft: theend
+//http://www.mariomayhem.com/downloads/sounds/
 class ControlUnit {
     constructor(host, generatePrinters) {
         this.currentIndex = 0;
@@ -124,21 +129,21 @@ class ControlUnit {
     }
     
     registerStateUser(obj) {
-        if(obj instanceof StateUserInterface || obj instanceof InterfaceCoordinatesAndStateUser) {
+        if(obj instanceof InterfaceStateUser || obj instanceof InterfaceCoordinatesAndStateUser) {
             this.stateUsers.push(obj);
             console.log("New stateUser in controlUnit");
         }
     }
     
     registerCoordinatesUser(obj) {
-        if(obj instanceof CoordinatesUserInterface || obj instanceof InterfaceCoordinatesAndStateUser) {
+        if(obj instanceof InterfaceCoordinatesUser || obj instanceof InterfaceCoordinatesAndStateUser) {
             this.coordinatesUsers.push(obj);
             console.log("New positionUser in controlUnit");
         }
     }
     
     registerTimePrinter(obj) {
-        if(obj instanceof TimePrinterInterface || obj instanceof InterfaceCoordinatesAndStateUserAndTimePrinter) {
+        if(obj instanceof InterfaceTimePrinter || obj instanceof InterfaceCoordinatesAndStateUserAndTimePrinter) {
             this.timePrinters.push(obj);
             console.log("New timePrinter in controlUnit");
         }
