@@ -2,6 +2,8 @@
 class PositionPrinter extends CoordinatesAndStateChangeListener {
     constructor() {
         super();
+        this.xCanvas = 0;
+        this.yCanvas = 0;
         this.view = new PositionPrinterView();
         this.model = new PositionPrinterModel();
         this.model.registerCoordinatesChangeListener(this);
@@ -15,11 +17,10 @@ class PositionPrinter extends CoordinatesAndStateChangeListener {
     }
     
     convertCoordinates(x, y) {
-        //ToDo: Convert coordinates
-        //x between 0 and 350
-        //y between 0 and 110
-        //cube starts at 65
-        this.view.moveTo(x, y);
+        this.xCanvas = 50 + (x * 600 / 350);
+        this.yCanvas = 450 - 155 - (y * 105 / 110);
+        console.log("new coords: "+x+", "+y);
+        this.view.moveTo(this.xCanvas, this.yCanvas);
     }
     
     coordinatesChanged(x, y) {
@@ -28,9 +29,9 @@ class PositionPrinter extends CoordinatesAndStateChangeListener {
     
     stateChanged(state) {
         if(state === State["PACKAGE_PICKED_UP"]) {
-            this.model.setCubePicketUp(true);
+            this.view.setCubePicketUp(true);
         } else if(state === State["PACKAGE_DROPPED"]) {
-            this.model.setCubePicketUp(false);
+            this.view.setCubePicketUp(false);
         }
         this.view.printState(state);
     }

@@ -1,5 +1,6 @@
 
 class PositionPrinterView {
+    //cube starts at 65
     constructor() {
         this.xMin = 50;
         this.xMax = 650;
@@ -36,7 +37,7 @@ class PositionPrinterView {
     moveToStart() {
         //ToDo: Depend on cubepickup
         this.drawBorders();
-        this.cube.print(this.canvas, 150, 360);
+        this.cube.print(this.canvas, 115, 360);
     }
     
     moveToEnd() {
@@ -65,5 +66,9 @@ class PositionPrinterView {
     
     print(x, y) {
         this.cube.print(this.canvas, x, y);
+    }
+    
+    printState() {
+        
     }
 }

@@ -13,6 +13,7 @@
         <script type="text/javascript" src="stateChangeListener.js"></script>
         <script type="text/javascript" src="coordinatesChangeListener.js"></script>
         <script type="text/javascript" src="coordinatesAndStateChangeListener.js"></script>
+        <script type="text/javascript" src="audioplayer.js"></script>
         <script type="text/javascript" src="stateprinter/statePrinterModel.js"></script>
         <script type="text/javascript" src="stateprinter/statePrinterView.js"></script>
         <script type="text/javascript" src="stateprinter/statePrinter.js"></script>
@@ -28,6 +29,15 @@
         <script type="text/javascript" src="controlUnit.js"></script>
     </head>
     <body>
+        <audio id="audioMain" preload="auto">
+            <source src="soundfiles/main.mp3" />
+        </audio>
+        <audio id="audioItsMe" preload="auto">
+            <source src="soundfiles/mario-itsme.wav" />
+        </audio>
+        <audio id="audioTheEnd" preload="auto">
+            <source src="soundfiles/mario-theend.wav" />
+        </audio>
         <div id="pagetitle">
             <h1>Mission PREN T-30</h1>
         </div>
@@ -67,28 +77,28 @@
             statePrinter.registrateModel(cpu);
             let positionPrinter = new PositionPrinter();
             positionPrinter.registrateModel(cpu);
-            let x = 150;
-            let y = 360;
+            let x = 0;
+            let y = 0;
             let cState = "DEVICE_STARTED";
             setInterval(function(){
                 cpu.parseResponse({"index":10, "history":[{"x":x,"y":y,"message":"Sali Joel","state":cState}]});
-                if(x>150) {
+                if(x>65) {
                     cState = "PACKAGE_PICKED_UP";
                 }
-                if(x>200) {
+                if(x>80) {
                     cState = "OBSTACLE_PASSED";
                 }
-                if(x>400) {
+                if(x>200) {
                     cState = "TARGET_DETECTED";
                 }
-                if(x>450) {
+                if(x>280) {
                     cState = "PACKAGE_DROPPED";
                 }
-                if(x>600) {
+                if(x>320) {
                     cState = "DESTINATION_REACHED";
                 }
                 x = x+2;
-                y = y-0.5;
+                y = y+1;
             }, 200);
             function startTrolley() {
                 cpu.startTrolley();

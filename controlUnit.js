@@ -17,6 +17,7 @@ class ControlUnit {
         this.stateUsers = [];
         this.coordinatesUsers = [];
         this.timePrinters = [];
+        this.registerStateUser(new Audioplayer());
         if(generatePrinters) {
             logPrinter = new LogPrinter();
             logPrinter.registrateModel(this);
