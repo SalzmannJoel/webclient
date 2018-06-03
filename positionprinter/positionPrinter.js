@@ -34,6 +34,7 @@ class PositionPrinter extends CoordinatesAndStateChangeListener {
         } else if(state === State["PACKAGE_DROPPED"]) {
             this.view.setCubePicketUp(false);
             this.view.setCubeDropped(true);
+            this.view.setFinalCoordinates(this.xCanvas, this.yCanvas);
         }
         this.view.printState(state);
     }

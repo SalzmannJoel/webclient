@@ -1,9 +1,21 @@
-
+/**
+ * This class is responsible for playing sounds depending on a state.
+ * @type Audioplayer
+ */
 class Audioplayer extends InterfaceStateUser {
+    /**
+     * This method creates an instance of Audioplayer.
+     * @returns {Audioplayer}
+     */
     constructor() {
         super();
     }
     
+    /**
+     * This method is called by a controller. It plays different
+     * sound if a specific State is reached.
+     * @param {State} state
+     */
     setState(state) {
         if(state > 0 && state < 8) {
             this.state = state;

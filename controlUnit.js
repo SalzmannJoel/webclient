@@ -1,10 +1,16 @@
-//zielmasten erreicht: stage clear
-//package picket up: power up
-//device stoppet ohne würfel abgesetz: mammamia
-//startsignal: herewego
-//parcour geschafft: theend
-//http://www.mariomayhem.com/downloads/sounds/
+/**
+ * This class is the controlUnit of the Webclient. It is responsible
+ * for sending request, defining callbacks and call the different changeListeners(users)
+ * @type ControlUnit
+ */
 class ControlUnit {
+    /**
+     * This method creates a new instance of ConrolUnit
+     * @param {string} host : the address of the server
+     * @param {boolean} generatePrinters : if true, the different printers
+     * will be generated automatically
+     * @returns {ControlUnit} 
+     */
     constructor(host, generatePrinters) {
         this.currentIndex = 0;
         this.currentX = 0;
@@ -28,6 +34,11 @@ class ControlUnit {
         }
     }
     
+    /**
+     * This method sends requests in an intervall
+     * to retrieve new jsonObjects from the server. This method
+     * should be called only once while the programm is running.
+     */
     run() {
         let self = this;
         self.connector.request(self, 0, 0);
@@ -39,22 +50,43 @@ class ControlUnit {
         }
     }
     
+    /**
+     * This method sends a request to start the trolley
+     * and calls run()
+     */
     startTrolley() {
         this.stopRequest = false;
         this.connector.request(this, 1, -1);
         this.run();
     }
     
+    /**
+     * This method sends a request to stop the trolley
+     */
     stopTrolley() {
         this.connector.request(this, 2, -1);
         this.stopRequest = true;
     }
     
+    /**
+     * This method sets the last response to the current response
+     * @param {Object} response : a jsonObject with either
+     *  history
+     *  and index
+     *  or an error
+     */
     fetchResponse(response) {
         this.lastResponse = response;
         this.parseResponse(response);
     }
     
+    /**
+     * This method parses a jsonObject
+     * @param {object} response : a jsonObject with either
+     *  history
+     *  and index
+     *  or an error
+     */
     parseResponse(response) {
         let jsonObject = typeof response === "object" ? response : JSON.parse(response);
         if(jsonObject.hasOwnProperty("error")) {
@@ -73,6 +105,14 @@ class ControlUnit {
         }
     }
     
+    /**
+     * This method parses a jsonObject
+     * @param {object} history : a jsonObject with 
+     *  x coordinate
+     *  y coordinate
+     *  message
+     *  and state
+     */
     parseHistory(history) {
         if(typeof history !== "object" || history === null) {
             throw new TypeError("Invalid param. Expected Json object but was "+typeof history);
@@ -103,6 +143,10 @@ class ControlUnit {
         }
     }
     
+    /**
+     * This method is used to notify all stateUsers
+     * @param {State} state
+     */
     setState(state) {
         if(state >= State["DEVICE_STARTED"] && state <= State["DEVICE_STOPPED"]) {
             this.state = state;
@@ -112,23 +156,41 @@ class ControlUnit {
         }
     }
     
+    /**
+     * This method is used to notify all coordinateUsers
+     * @param {int} x
+     * @param {int} y
+     */
     setCoordinates(x, y) {
         this.coordinatesUsers.forEach(function(item) {
             item.setCoordinates(x, y);
         });
     }
     
+    /**
+     * This method is called to notify all messageUsers
+     * @param {string} message
+     */
     setMessage(message) {
         //ToDo: implement
     }
-    
-    //could be realised this way or directly in printState
+
+    /**
+     * This method is used for setting a new time.
+     * All registratet timeprinters will be called
+     * @param {timestamp} time
+     */
     setTime(time) {
         this.timePrinters.forEach(function(item) {
             item.printTime(time);
         });
     }
     
+    /**
+     * This method is used for registrating objects
+     * who are interested in state changes
+     * @param {object} obj
+     */
     registerStateUser(obj) {
         if(obj instanceof InterfaceStateUser || obj instanceof InterfaceCoordinatesAndStateUser) {
             this.stateUsers.push(obj);
@@ -136,6 +198,11 @@ class ControlUnit {
         }
     }
     
+    /**
+     * This method is used for registrating objects
+     * who are interested in coordinate changes
+     * @param {object} obj
+     */
     registerCoordinatesUser(obj) {
         if(obj instanceof InterfaceCoordinatesUser || obj instanceof InterfaceCoordinatesAndStateUser) {
             this.coordinatesUsers.push(obj);
@@ -143,6 +210,11 @@ class ControlUnit {
         }
     }
     
+    /**
+     * This method is used for registrating objects
+     * who are interested in time changes
+     * @param {object} obj
+     */
     registerTimePrinter(obj) {
         if(obj instanceof InterfaceTimePrinter || obj instanceof InterfaceCoordinatesAndStateUserAndTimePrinter) {
             this.timePrinters.push(obj);

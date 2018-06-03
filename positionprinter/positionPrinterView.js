@@ -8,6 +8,8 @@ class PositionPrinterView {
         this.yMax = 160;
         this.initialX = 165;
         this.initialY = 360;
+        this.finalX = 165;
+        this.finalY = 360;
         this.cubePickedUp = false;
         this.cubeDropped = false;
         this.canvas = document.getElementById("positionviewCanvas");
@@ -46,11 +48,10 @@ class PositionPrinterView {
     moveToEnd() {
         //ToDo: Depend on cubepickup
         this.drawBorders();
-        this.cube.print(this.canvas, 550, 360);
+        this.cube.print(this.canvas, this.finalX, this.finalY);
     }
     
     moveTo(x, y) {
-        //ToDo: Depend on cubepickup
         this.drawBorders();
         let cubeWidthHalf = this.cube.width/2;
         let yLinePoint = this.yMax-(this.yMax-this.yMin)*(x+cubeWidthHalf-this.xMin)/(this.xMax-this.xMin);
@@ -77,7 +78,7 @@ class PositionPrinterView {
         if(this.cubePicketUp){
             this.print(x,y);
         } else if(this.cubeDropped) {
-            
+            this.print(this.finalX, this.finalY);
         } else {
             this.print(this.initialX, this.initialY);
         }
@@ -89,6 +90,11 @@ class PositionPrinterView {
     
     setCubeDropped(bool) {
         this.cubeDropped = bool;
+    }
+    
+    setFinalCoordinates(x, y) {
+        this.finalX = x;
+        this.finalY = y;
     }
     
     print(x, y) {
