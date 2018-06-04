@@ -1,5 +1,12 @@
-
+/**
+ * This class is a model class. It holds the data for a LogPrinter.
+ * @type LogPrinterModel
+ */
 class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
+    /**
+     * This method creates a new instance of LogPrinterModel
+     * @returns {LogPrinterModel}
+     */
     constructor() {
         super();
         this.stateChangeListeners = [];
@@ -9,6 +16,11 @@ class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
         this.y = 0;
     }
     
+    /**
+     * This method is used for registrating objects
+     * who are interested in state changes, typically controllers.
+     * @param {object} obj
+     */
     registerStateChangeListener(obj) {
         if(obj instanceof StateChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
             this.stateChangeListeners.push(obj);
@@ -16,6 +28,11 @@ class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
         }
     }
     
+    /**
+     * This method is used for registrating objects
+     * who are interested in coordiante changes, typically controllers.
+     * @param {object} obj
+     */
     registerCoordinatesChangeListener(obj) {
         if(obj instanceof CoordinatesChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
             this.coordinatesChangeListeners.push(obj);
@@ -23,6 +40,10 @@ class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
         }
     }
     
+    /**
+     * This method is used to notify all stateUsers
+     * @param {State} state
+     */
     setState(state) {
         if(state > 0 && state <8) {
             this.state = state;
@@ -32,6 +53,11 @@ class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
         }
     }
     
+    /**
+     * This method is used to notify all coordinateUsers
+     * @param {int} x
+     * @param {int} y
+     */
     setCoordinates(x, y) {
         if(!isNaN(x) && !isNaN(y)) {
             this.x = x;
