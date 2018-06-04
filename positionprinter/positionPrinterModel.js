@@ -12,14 +12,14 @@ class PositionPrinterModel extends InterfaceCoordinatesAndStateUser {
     registerStateChangeListener(obj) {
         if(obj instanceof StateChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
             this.stateChangeListeners.push(obj);
-            console.log("New stateChangeListener in LogPrinterModel" + obj);
+            console.log("New stateChangeListener in PositionPrinterModel" + obj);
         }
     }
     
     registerCoordinatesChangeListener(obj) {
         if(obj instanceof CoordinatesChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
             this.coordinatesChangeListeners.push(obj);
-            console.log("New coordinatesChangeListener in LogPrinterModel");
+            console.log("New coordinatesChangeListener in PositionPrinterModel");
         }
     }
     
