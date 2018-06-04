@@ -22,7 +22,8 @@ class PositionPrinterModel extends InterfaceCoordinatesAndStateUser {
      * @param {object} obj
      */
     registerStateChangeListener(obj) {
-        if(obj instanceof StateChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
+        if(obj instanceof StateChangeListener || obj instanceof CoordinatesAndStateChangeListener ||
+                obj instanceof MessageAndStateChangeListener || obj instanceof CoordinatesAndMessageAndStateChangeListener) {
             this.stateChangeListeners.push(obj);
             console.log("New stateChangeListener in PositionPrinterModel" + obj);
         }
@@ -34,7 +35,8 @@ class PositionPrinterModel extends InterfaceCoordinatesAndStateUser {
      * @param {object} obj
      */
     registerCoordinatesChangeListener(obj) {
-        if(obj instanceof CoordinatesChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
+        if(obj instanceof CoordinatesChangeListener || obj instanceof CoordinatesAndMessageChangeListener || 
+                obj instanceof CoordinatesAndStateChangeListener || obj instanceof CoordinatesAndMessageAndStateChangeListener) {
             this.coordinatesChangeListeners.push(obj);
             console.log("New coordinatesChangeListener in PositionPrinterModel");
         }

@@ -22,6 +22,7 @@ class ControlUnit {
         this.connector = new Connector(host);
         this.stateUsers = [];
         this.coordinatesUsers = [];
+        this.messageUsers = [];
         this.timePrinters = [];
         this.registerStateUser(new Audioplayer());
         if(generatePrinters) {
@@ -172,7 +173,9 @@ class ControlUnit {
      * @param {string} message
      */
     setMessage(message) {
-        //ToDo: implement
+        this.messageUsers.forEach(function(item) {
+            item.setMessage(message);
+        });
     }
 
     /**
@@ -192,7 +195,8 @@ class ControlUnit {
      * @param {object} obj
      */
     registerStateUser(obj) {
-        if(obj instanceof InterfaceStateUser || obj instanceof InterfaceCoordinatesAndStateUser) {
+        if(obj instanceof InterfaceStateUser || obj instanceof InterfaceCoordinatesAndStateUser || 
+                obj instanceof InterfaceMessageAndStateUser || obj instanceof InterfaceCoordinatesAndMessageAndStateUser) {
             this.stateUsers.push(obj);
             console.log("New stateUser in controlUnit");
         }
@@ -204,7 +208,8 @@ class ControlUnit {
      * @param {object} obj
      */
     registerCoordinatesUser(obj) {
-        if(obj instanceof InterfaceCoordinatesUser || obj instanceof InterfaceCoordinatesAndStateUser) {
+        if(obj instanceof InterfaceCoordinatesUser || obj instanceof InterfaceCoordinatesAndMessageUser || 
+                obj instanceof InterfaceCoordinatesAndStateUser || obj instanceof InterfaceCoordinatesAndMessageAndStateUser) {
             this.coordinatesUsers.push(obj);
             console.log("New positionUser in controlUnit");
         }
@@ -212,13 +217,14 @@ class ControlUnit {
     
     /**
      * This method is used for registrating objects
-     * who are interested in time changes
+     * who are interested in message changes
      * @param {object} obj
      */
-    registerTimePrinter(obj) {
-        if(obj instanceof InterfaceTimePrinter || obj instanceof InterfaceCoordinatesAndStateUserAndTimePrinter) {
-            this.timePrinters.push(obj);
-            console.log("New timePrinter in controlUnit");
+    registerMessageUser(obj) {
+        if(obj instanceof InterfaceMessageUser || obj instanceof InterfaceCoordinatesAndMessageUser || 
+                obj instanceof InterfaceMessageAndStateUser || obj instanceof InterfaceCoordinatesAndMessageAndStateUser) {
+            this.messageUsers.push(obj);
+            console.log("New messageUser in controlUnit");
         }
     }
 }

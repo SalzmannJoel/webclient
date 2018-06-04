@@ -19,7 +19,8 @@ class StatePrinterModel extends InterfaceStateUser {
      * @param {object} obj
      */
     registerStateChangeListener(obj) {
-        if(obj instanceof StateChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
+        if(obj instanceof StateChangeListener || obj instanceof CoordinatesAndStateChangeListener ||
+                obj instanceof MessageAndStateChangeListener || obj instanceof CoordinatesAndMessageAndStateChangeListener) {
             this.stateChangeListeners.push(obj);
             console.log("New stateChangeListener in LogPrinterModel" + obj);
         }

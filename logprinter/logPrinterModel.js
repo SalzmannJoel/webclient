@@ -2,7 +2,7 @@
  * This class is a model class. It holds the data for a LogPrinter.
  * @type LogPrinterModel
  */
-class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
+class LogPrinterModel extends InterfaceCoordinatesAndMessageAndStateUser {
     /**
      * This method creates a new instance of LogPrinterModel
      * @returns {LogPrinterModel}
@@ -11,9 +11,11 @@ class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
         super();
         this.stateChangeListeners = [];
         this.coordinatesChangeListeners = [];
+        this.messageChangeListeners = [];
         this.state = State["START_REACHED"];
         this.x = 0;
         this.y = 0;
+        this.message = "";
     }
     
     /**
@@ -22,7 +24,8 @@ class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
      * @param {object} obj
      */
     registerStateChangeListener(obj) {
-        if(obj instanceof StateChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
+        if(obj instanceof StateChangeListener || obj instanceof CoordinatesAndStateChangeListener ||
+                obj instanceof MessageAndStateChangeListener || obj instanceof CoordinatesAndMessageAndStateChangeListener) {
             this.stateChangeListeners.push(obj);
             console.log("New stateChangeListener in LogPrinterModel" + obj);
         }
@@ -34,9 +37,23 @@ class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
      * @param {object} obj
      */
     registerCoordinatesChangeListener(obj) {
-        if(obj instanceof CoordinatesChangeListener || obj instanceof CoordinatesAndStateChangeListener) {
+        if(obj instanceof CoordinatesChangeListener || obj instanceof CoordinatesAndMessageChangeListener || 
+                obj instanceof CoordinatesAndStateChangeListener || obj instanceof CoordinatesAndMessageAndStateChangeListener) {
             this.coordinatesChangeListeners.push(obj);
             console.log("New coordinatesChangeListener in LogPrinterModel");
+        }
+    }
+    
+    /**
+     * This method is used for registrating objects
+     * who are interested in message changes, typically controllers.
+     * @param {object} obj
+     */
+    registerMessageChangeListener(obj) {
+        if(obj instanceof MessageChangeListener || obj instanceof CoordinatesAndMessageChangeListener || 
+                obj instanceof MessageAndStateChangeListener || obj instanceof CoordinatesAndMessageAndStateChangeListener) {
+            this.coordinatesChangeListeners.push(obj);
+            console.log("New messageChangeListener in LogPrinterModel");
         }
     }
     
@@ -51,6 +68,17 @@ class LogPrinterModel extends InterfaceCoordinatesAndStateUser {
                 item.stateChanged(state);
             });
         }
+    }
+    
+    /**
+     * This method is used to notify all messageUsers
+     * @param {String} message
+     */
+    setMessage(message) {
+        this.message = message;
+        this.messageChangeListeners.forEach(function(item) {
+            item.messageChanged(message);
+        });
     }
     
     /**

@@ -60,4 +60,16 @@ class LogPrinterView {
         this.output.appendChild(pTag);
         this.output.scrollTop = this.output.scrollHeight;
     }
+    
+    /**
+     * This method is used to print a change of message
+     * @param {String} message
+     */
+    printMessage(message) {
+        let pTag = document.createElement('p');
+        let content = "Die Nachricht hat sich verändert und ist neu: "+message;
+        pTag.textContent = content;
+        this.output.appendChild(pTag);
+        this.output.scrollTop = this.output.scrollHeight;
+    }
 }

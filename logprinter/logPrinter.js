@@ -14,6 +14,7 @@ class LogPrinter extends CoordinatesAndStateChangeListener {
         this.model = new LogPrinterModel();
         this.model.registerStateChangeListener(this);
         this.model.registerCoordinatesChangeListener(this);
+        this.model.registerMessageChangeListener(this);
     }
     
     /**
@@ -23,6 +24,7 @@ class LogPrinter extends CoordinatesAndStateChangeListener {
     registrateModel(provider) {
         provider.registerCoordinatesUser(this.model);
         provider.registerStateUser(this.model);
+        provider.registerMessageUser(this.model);
     }
     
     /**
@@ -40,5 +42,13 @@ class LogPrinter extends CoordinatesAndStateChangeListener {
      */
     stateChanged(state) {
         this.view.printState(state);
+    }
+    
+    /**
+     * This method is called, when the message of the model changes.
+     * @param {String} message
+     */
+    messageChanged(message) {
+        this.view.printMessage(message);
     }
 }
