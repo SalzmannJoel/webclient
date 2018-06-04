@@ -3,7 +3,7 @@
  * prints them in a logView.
  * @type LogPrinter
  */
-class LogPrinter extends CoordinatesAndStateChangeListener {
+class LogPrinter extends CoordinatesAndMessageAndStateChangeListener {
     /**
      * Creates a new instance of LogPrinter
      * @returns {LogPrinter}

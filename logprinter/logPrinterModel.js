@@ -52,7 +52,7 @@ class LogPrinterModel extends InterfaceCoordinatesAndMessageAndStateUser {
     registerMessageChangeListener(obj) {
         if(obj instanceof MessageChangeListener || obj instanceof CoordinatesAndMessageChangeListener || 
                 obj instanceof MessageAndStateChangeListener || obj instanceof CoordinatesAndMessageAndStateChangeListener) {
-            this.coordinatesChangeListeners.push(obj);
+            this.messageChangeListeners.push(obj);
             console.log("New messageChangeListener in LogPrinterModel");
         }
     }
