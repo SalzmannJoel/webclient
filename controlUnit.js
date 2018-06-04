@@ -23,8 +23,9 @@ class ControlUnit {
         this.stateUsers = [];
         this.coordinatesUsers = [];
         this.messageUsers = [];
-        this.timePrinters = [];
         this.registerStateUser(new Audioplayer());
+        this.startTime = null;
+        this.destinationReached = false;
         if(generatePrinters) {
             logPrinter = new LogPrinter();
             logPrinter.registrateModel(this);
@@ -44,7 +45,8 @@ class ControlUnit {
         let self = this;
         self.connector.request(self, 0, 0);
         self.running = setInterval(function(){ 
-            self.connector.request(self ,0, -1);
+            self.connector.request(self, 0, -1);
+            self.setTime(new Date().getTime());
         }, 50);
         if(this.stopRequest) {
             clearInterval(self.running);
@@ -58,6 +60,7 @@ class ControlUnit {
     startTrolley() {
         this.stopRequest = false;
         this.connector.request(this, 1, -1);
+        this.startTime = new Date().getTime();
         this.run();
     }
     
@@ -67,6 +70,7 @@ class ControlUnit {
     stopTrolley() {
         this.connector.request(this, 2, -1);
         this.stopRequest = true;
+        this.destinationReached = true;
     }
     
     /**
@@ -129,6 +133,9 @@ class ControlUnit {
             if(this.currentState !== item.state) {
                 console.log("new State: "+item.state);
                 this.currentState = item.state;
+                if(this.currentState === "DESTINATION_REACHED") {
+                    this.destinationReached = true;
+                }
                 this.setState(State[this.currentState]);
             }
             if(this.currentX !== item.x || this.currentY !== item.y) {
@@ -166,6 +173,10 @@ class ControlUnit {
         this.coordinatesUsers.forEach(function(item) {
             item.setCoordinates(x, y);
         });
+        var outputArea = document.getElementById("coordinates");
+        if(outputArea !== null) {
+            outputArea.innerHTML = "x: "+x+", y: "+y;
+        }
     }
     
     /**
@@ -180,13 +191,13 @@ class ControlUnit {
 
     /**
      * This method is used for setting a new time.
-     * All registratet timeprinters will be called
      * @param {timestamp} time
      */
     setTime(time) {
-        this.timePrinters.forEach(function(item) {
-            item.printTime(time);
-        });
+        var outputArea = document.getElementById("time");
+        if(outputArea !== null && !this.destinationReached) {
+            outputArea.innerHTML = time - this.startTime;
+        }
     }
     
     /**

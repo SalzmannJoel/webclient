@@ -54,7 +54,19 @@
             <source src="soundfiles/mario-theend.wav" />
         </audio>
         <div id="pagetitle">
-            <h1>Mission PREN T-30</h1>
+            <div class="part left">
+                <h2>Mario</h2>
+                <p id="coordinates">:</p>
+            </div>
+            <div class="part center">
+                <h2>World</h2>
+                <p>2-30</p>
+            </div>
+            <div class="part right">
+                <h2>Time</h2>
+                <p id="time">-</p>
+            </div>
+            
         </div>
         <div id="stateview">
             <canvas id="stateviewCanvas" width="1000" height="150">
@@ -114,7 +126,7 @@
                 }
                 x = x+2;
                 y = y+1;
-            }, 500);
+            }, 200);
             function startTrolley() {
                 cpu.startTrolley();
             }
