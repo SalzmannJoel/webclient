@@ -133,16 +133,17 @@ class ControlUnit {
             if(this.currentState !== item.state) {
                 console.log("new State: "+item.state);
                 this.currentState = item.state;
-                if(this.currentState === "DESTINATION_REACHED") {
+                if(this.currentState === "DESTINATION_REACHED" || this.currentState === "DEVICE_STOPPED") {
                     this.destinationReached = true;
+                    this.setState(State["DESTINATION_REACHED"]);
                 }
                 this.setState(State[this.currentState]);
             }
             if(this.currentX !== item.x || this.currentY !== item.y) {
-                this.currentX = item.x;
-                this.currentY = item.y;
+                this.currentX = Math.floor(item.x);
+                this.currentY = Math.floor(item.y);
                 console.log("new coordinates: x="+item.x+", y="+item.y);
-                this.setCoordinates(item.x, item.y);
+                this.setCoordinates(Math.floor(item.x), Math.floor(item.y));
             }
             if(this.currentMessage !== item.message) {
                 this.currentMessage = item.message;
