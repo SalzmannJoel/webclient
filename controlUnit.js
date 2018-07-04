@@ -26,6 +26,7 @@ class ControlUnit {
         this.registerStateUser(new Audioplayer());
         this.startTime = null;
         this.destinationReached = false;
+        this.packageDropped = false;
         if(generatePrinters) {
             logPrinter = new LogPrinter();
             logPrinter.registrateModel(this);
@@ -47,7 +48,7 @@ class ControlUnit {
         self.running = setInterval(function(){ 
             self.connector.request(self, 0, -1);
             self.setTime(new Date().getTime());
-        }, 50);
+        }, 200);
         if(this.stopRequest) {
             clearInterval(self.running);
         }
@@ -137,6 +138,9 @@ class ControlUnit {
                     this.destinationReached = true;
                     this.setState(State["DESTINATION_REACHED"]);
                 }
+                if(this.currentState === "PACKAGE_DROPPED") {
+                    this.packageDropped = true;
+                }
                 this.setState(State[this.currentState]);
             }
             if(this.currentX !== item.x || this.currentY !== item.y) {
@@ -175,7 +179,7 @@ class ControlUnit {
             item.setCoordinates(x, y);
         });
         var outputArea = document.getElementById("coordinates");
-        if(outputArea !== null) {
+        if(outputArea !== null && !this.packageDropped) {
             outputArea.innerHTML = "x: "+x+", y: "+y;
         }
     }
